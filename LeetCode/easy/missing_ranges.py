@@ -2,6 +2,7 @@
 
 
 class Solution:
+    # noinspection PyMethodMayBeStatic
     def findMissingRanges(
         self, nums: list[int], lower: int, upper: int
     ) -> list[list[int]]:
