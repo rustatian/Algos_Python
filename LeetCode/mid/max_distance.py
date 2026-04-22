@@ -23,5 +23,6 @@ class Solution:
 
         return res
 
+
 s = Solution()
-assert 2 == s.maxDistance([30,29,19,5], [25,25,25,25,25])
+assert 2 == s.maxDistance([30, 29, 19, 5], [25, 25, 25, 25, 25])

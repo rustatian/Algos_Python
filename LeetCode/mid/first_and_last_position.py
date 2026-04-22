@@ -1,7 +1,6 @@
 # https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 
 
-
 class Solution:
     # noinspection PyMethodMayBeStatic
     def search_rightmost(self, nums: list[int], target: int) -> int:
@@ -16,7 +15,6 @@ class Solution:
                 hi = mid - 1
 
         return hi if nums[hi] == target else -1
-
 
     # noinspection PyMethodMayBeStatic
     def search_leftmost(self, nums: list[int], target: int) -> int:
@@ -40,8 +38,8 @@ class Solution:
             return [-1, -1]
         r = self.search_rightmost(nums, target)
 
-
         return [l, r]
+
 
 s = Solution()
 assert s.searchRange([5, 7, 7, 8, 8, 10], 8) == [3, 4]
