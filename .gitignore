@@ -5,6 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
+.claude/CLAUDE.local.md
+.claude/learn.html
 
 # Distribution / packaging
 .Python
@@ -24,6 +26,7 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.claude/CLAUDE.local.md
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

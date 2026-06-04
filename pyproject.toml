@@ -9,6 +9,39 @@ dependencies = []
 [dependency-groups]
 dev = [
     "mypy>=1.20.1",
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.3.0",
     "ruff>=0.15.11",
     "ty>=0.0.31",
+]
+
+[tool.uv.workspace]
+members = [
+    "Algorithms/token_bucket",
+    "Algorithms/id_allocator",
+    "Algorithms/web_crawler",
+    "Futures/multithreading",
+    "Algorithms/file_duplicates",
+    "Algorithms/hit_counter",
+    "Algorithms/permissions_fs",
+    "Algorithms/rwlock_semaphores",
+    "Algorithms/double_circuit_breaker",
+    "Algorithms/event_logger",
+    "Algorithms/api_design",
+    "Algorithms/kv_store",
+    "Algorithms/hangman",
+    "Algorithms/evil_hangman",
+    "Algorithms/fs_crawler",
+    "Algorithms/byte_pattern",
+    "Algorithms/producer_consumer_service",
+    "Algorithms/lru",
+    "Algorithms/build_fs",
+    "Algorithms/snapshot_set",
+    "Algorithms/word_guessing_feedback",
+    "preparation/probe1",
+    "preparation/probe2",
+    "preparation/probe3",
+    "preparation/probe4",
+    "preparation/probe5",
+    "preparation/probe6",
 ]
