@@ -44,4 +44,5 @@ members = [
     "preparation/probe4",
     "preparation/probe5",
     "preparation/probe6",
+    "Algorithms/probe2/kvstore",
 ]
