@@ -3,11 +3,12 @@ import time
 from threading import Lock
 from time import monotonic
 
+
 class TokenBucket:
     def __init__(self, capacity: int, refill_rate_per_sec: float):
         self._capacity = capacity
         self._refill_rate = refill_rate_per_sec
-        self._bucket = capacity # full bucket
+        self._bucket = capacity  # full bucket
         self._prev_refill = monotonic()
         self._lock = Lock()
 

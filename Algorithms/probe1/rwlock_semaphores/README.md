@@ -59,8 +59,12 @@ All four expose the same surface:
 
 ```python
 lock = WriterPriorityRWLock()
-lock.acquire_read();  ...; lock.release_read()
-lock.acquire_write(); ...; lock.release_write()
+lock.acquire_read()
+...
+lock.release_read()
+lock.acquire_write()
+...
+lock.release_write()
 ```
 
 The fairness story:

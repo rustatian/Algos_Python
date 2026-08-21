@@ -24,10 +24,10 @@ across many workers, and recovering jobs whose worker died.
 
 ```python
 q = DBBackedQueue()
-jid = q.submit("resize:img1")   # producer: durable + acked NOW (not after work)
-job = q.claim()                 # a worker atomically takes it -> PROCESSING
+jid = q.submit("resize:img1")  # producer: durable + acked NOW (not after work)
+job = q.claim()  # a worker atomically takes it -> PROCESSING
 q.complete(job.id, "thumb1")
-q.status(jid)                   # -> SUCCESS
+q.status(jid)  # -> SUCCESS
 ```
 
 ## Tiers

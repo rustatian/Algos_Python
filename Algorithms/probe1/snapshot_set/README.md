@@ -26,10 +26,12 @@ from later mutation.
 
 ```python
 s = SimpleSnapshotSet()
-s.add("a"); s.add("b")
-snap = s.snapshot()        # captures {a, b}
-s.add("c"); s.remove("a")  # live set moves on
-sorted(s.items())     # -> ["b", "c"]   (live)
+s.add("a")
+s.add("b")
+snap = s.snapshot()  # captures {a, b}
+s.add("c")
+s.remove("a")  # live set moves on
+sorted(s.items())  # -> ["b", "c"]   (live)
 sorted(snap.items())  # -> ["a", "b"]   (frozen)
 ```
 

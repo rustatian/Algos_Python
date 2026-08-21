@@ -84,12 +84,12 @@ Flat, single-level transactions on the put/get/delete surface:
 
 ```python
 kv = TransactionalKV()
-kv.put("a", 1)            # autocommit — straight to the base store
+kv.put("a", 1)  # autocommit — straight to the base store
 kv.begin()
-kv.put("a", 2)            # buffered in the overlay
-kv.get("a")     # -> 2    # overlay shadows the base
+kv.put("a", 2)  # buffered in the overlay
+kv.get("a")  # -> 2    # overlay shadows the base
 kv.rollback()
-kv.get("a")     # -> 1    # base never changed
+kv.get("a")  # -> 1    # base never changed
 ```
 
 The design rests on two ideas:

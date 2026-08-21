@@ -1,6 +1,7 @@
 from threading import Lock
 import collections
 
+
 class IdAllocator:
     def __init__(self, n: int) -> None:
         """Manage IDs in range [0, n)."""
@@ -34,6 +35,7 @@ class IdAllocator:
                 self._seen.remove(id)
             else:
                 raise RuntimeError(f"unknown id {id}")
+
 
 # Example:
 # pool = IdAllocator(1000)

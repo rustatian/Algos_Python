@@ -105,7 +105,6 @@ class StatsKV:
                 heappop_max(self.heap)
             return None
 
-
     class WindowedKV:
         """Tier 3 — tumbling-window aggregates (Kafka-Streams style).
 

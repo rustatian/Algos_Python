@@ -83,7 +83,6 @@ from bisect import bisect_right
 from typing import Iterator
 
 
-
 class SimpleSnapshot:
     """The frozen view handed back by SimpleSnapshotSet.snapshot().
 

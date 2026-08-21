@@ -78,7 +78,7 @@ def test_delete_unknown_is_noop(kv_cls: type) -> None:
     Tests the dict.pop(key, None) idiom over plain del.
     """
     kv = kv_cls()
-    kv.delete("never_existed")        # must not raise
+    kv.delete("never_existed")  # must not raise
     assert kv.get("never_existed") is None
 
 
@@ -144,7 +144,7 @@ def test_ttl_value_returned_before_expiry() -> None:
     kv.put("session", "Alice", ttl_seconds=5)
     assert kv.get("session") == "Alice"
     clock.advance(3)
-    assert kv.get("session") == "Alice"      # 2s left
+    assert kv.get("session") == "Alice"  # 2s left
 
 
 def test_ttl_value_returns_none_after_expiry() -> None:
@@ -161,7 +161,7 @@ def test_ttl_expiry_at_exact_boundary() -> None:
     clock = FakeClock()
     kv = TTLKV(clock=clock)
     kv.put("k", "v", ttl_seconds=5)
-    clock.advance(5)                          # exactly at expiry
+    clock.advance(5)  # exactly at expiry
     assert kv.get("k") is None
 
 
@@ -182,7 +182,7 @@ def test_overwrite_resets_ttl() -> None:
     clock = FakeClock()
     kv = TTLKV(clock=clock)
     kv.put("k", "v1", ttl_seconds=5)
-    kv.put("k", "v2")                         # no TTL — clears expiry
+    kv.put("k", "v2")  # no TTL — clears expiry
     clock.advance(100)
     assert kv.get("k") == "v2"
 
@@ -192,9 +192,9 @@ def test_overwrite_replaces_ttl_with_new_ttl() -> None:
     clock = FakeClock()
     kv = TTLKV(clock=clock)
     kv.put("k", "v1", ttl_seconds=2)
-    kv.put("k", "v2", ttl_seconds=10)         # new TTL of 10s from now
-    clock.advance(5)                          # original TTL would have expired
-    assert kv.get("k") == "v2"                # but new TTL still has 5s left
+    kv.put("k", "v2", ttl_seconds=10)  # new TTL of 10s from now
+    clock.advance(5)  # original TTL would have expired
+    assert kv.get("k") == "v2"  # but new TTL still has 5s left
 
 
 def test_get_evicts_expired_key_lazily() -> None:
@@ -207,8 +207,8 @@ def test_get_evicts_expired_key_lazily() -> None:
     kv = TTLKV(clock=clock)
     kv.put("k", "v", ttl_seconds=1)
     clock.advance(5)
-    assert kv.get("k") is None                # lazy eviction here
-    assert kv.sweep_expired() == 0            # nothing left to sweep
+    assert kv.get("k") is None  # lazy eviction here
+    assert kv.sweep_expired() == 0  # nothing left to sweep
 
 
 def test_sweep_expired_returns_count_of_evicted() -> None:
@@ -258,7 +258,7 @@ def test_delete_works_on_expired_key() -> None:
     kv = TTLKV(clock=clock)
     kv.put("k", "v", ttl_seconds=1)
     clock.advance(5)
-    kv.delete("k")                            # must not raise
+    kv.delete("k")  # must not raise
     assert kv.get("k") is None
 
 
@@ -282,9 +282,9 @@ def test_commit_persists_buffered_writes() -> None:
     kv.put("a", 1)
     kv.begin()
     kv.put("a", 2)
-    assert kv.get("a") == 2          # overlay hit, before commit
+    assert kv.get("a") == 2  # overlay hit, before commit
     kv.commit()
-    assert kv.get("a") == 2          # base hit, after commit
+    assert kv.get("a") == 2  # base hit, after commit
 
 
 def test_rollback_discards_buffered_writes() -> None:
@@ -293,9 +293,9 @@ def test_rollback_discards_buffered_writes() -> None:
     kv.put("a", 1)
     kv.begin()
     kv.put("a", 99)
-    assert kv.get("a") == 99         # visible inside the txn
+    assert kv.get("a") == 99  # visible inside the txn
     kv.rollback()
-    assert kv.get("a") == 1          # base never changed
+    assert kv.get("a") == 1  # base never changed
 
 
 def test_new_key_inside_transaction_visible_then_rolled_back() -> None:
@@ -327,9 +327,9 @@ def test_delete_inside_transaction_hidden_then_rolled_back() -> None:
     kv.put("a", 1)
     kv.begin()
     kv.delete("a")
-    assert kv.get("a") is None       # tombstone — does NOT see base's 1
+    assert kv.get("a") is None  # tombstone — does NOT see base's 1
     kv.rollback()
-    assert kv.get("a") == 1          # delete rolled back
+    assert kv.get("a") == 1  # delete rolled back
 
 
 def test_delete_inside_transaction_persists_on_commit() -> None:
@@ -341,7 +341,7 @@ def test_delete_inside_transaction_persists_on_commit() -> None:
     kv.delete("a")
     kv.commit()
     assert kv.get("a") is None
-    assert kv.get("b") == 2          # untouched key survives
+    assert kv.get("b") == 2  # untouched key survives
 
 
 def test_delete_then_reput_inside_transaction() -> None:
@@ -349,8 +349,8 @@ def test_delete_then_reput_inside_transaction() -> None:
     kv = TransactionalKV()
     kv.put("a", 1)
     kv.begin()
-    kv.delete("a")                   # overlay: a -> TOMBSTONE
-    kv.put("a", 5)                   # overlay: a -> 5  (overwrites tombstone)
+    kv.delete("a")  # overlay: a -> TOMBSTONE
+    kv.put("a", 5)  # overlay: a -> 5  (overwrites tombstone)
     assert kv.get("a") == 5
     kv.commit()
     assert kv.get("a") == 5
@@ -362,9 +362,9 @@ def test_keys_untouched_by_transaction_fall_through_to_base() -> None:
     kv.put("a", 1)
     kv.put("b", 2)
     kv.begin()
-    kv.put("a", 100)                 # only 'a' is in the overlay
-    assert kv.get("a") == 100        # overlay
-    assert kv.get("b") == 2          # falls through to base
+    kv.put("a", 100)  # only 'a' is in the overlay
+    assert kv.get("a") == 100  # overlay
+    assert kv.get("b") == 2  # falls through to base
     kv.rollback()
 
 
@@ -396,7 +396,7 @@ def test_can_begin_again_after_commit() -> None:
     kv.begin()
     kv.put("a", 1)
     kv.commit()
-    kv.begin()                       # must not raise — txn was closed
+    kv.begin()  # must not raise — txn was closed
     kv.put("a", 2)
     kv.commit()
     assert kv.get("a") == 2
@@ -408,7 +408,7 @@ def test_can_begin_again_after_rollback() -> None:
     kv.begin()
     kv.put("a", 1)
     kv.rollback()
-    kv.begin()                       # must not raise
+    kv.begin()  # must not raise
     kv.put("a", 2)
     kv.commit()
     assert kv.get("a") == 2

@@ -38,7 +38,7 @@ naive   ->  [MATCH, MATCH, EXISTS, EXISTS]   # WRONG — invents a's that aren't
 ```
 
 ```python
-feedback("aabb", "aaaa")   # -> [MATCH, MATCH, ABSENT, ABSENT]
+feedback("aabb", "aaaa")  # -> [MATCH, MATCH, ABSENT, ABSENT]
 ```
 
 ## Tiers

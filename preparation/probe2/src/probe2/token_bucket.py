@@ -1,5 +1,7 @@
 import time
 from threading import Lock
+
+
 class TokenBucket:
     def __init__(self, capacity: int, refill_rate: float) -> None:
         """

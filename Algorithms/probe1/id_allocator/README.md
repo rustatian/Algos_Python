@@ -31,7 +31,7 @@ All four expose the same entry point:
 
 ```python
 a = Allocator(max_id)
-a.allocate()    # -> int | None
+a.allocate()  # -> int | None
 a.release(id)
 ```
 

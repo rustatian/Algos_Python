@@ -61,7 +61,7 @@ def evil_guess(candidates: set[str], guess: str) -> tuple[set[str], str]:
                 pattern += "_"
         d[pattern].add(cand)
 
-    best_pattern = max(d, key=lambda p: (len(d[p]), p.count('_'), p))
+    best_pattern = max(d, key=lambda p: (len(d[p]), p.count("_"), p))
     return set(d[best_pattern]), best_pattern
 
 

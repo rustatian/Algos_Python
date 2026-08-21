@@ -419,9 +419,7 @@ class ConcurrentTokenBucket:
                 # self-poke even if nobody else touches the bucket (the
                 # bucket refills passively from the clock, with no notify).
                 shortfall = n - self._tokens
-                timeout = (
-                    shortfall / self._fill_rate if self._fill_rate > 0 else None
-                )
+                timeout = shortfall / self._fill_rate if self._fill_rate > 0 else None
                 self._not_empty.wait(timeout=timeout)
                 # Loop and re-check: wait() can return on a notify, on the
                 # timeout, or spuriously — only the token check is authoritative.

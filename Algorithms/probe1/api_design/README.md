@@ -22,9 +22,9 @@ decouples acceptance from completion:
 
 ```python
 api = AsyncJobAPI(handler=transcode)
-rec = api.submit(video)        # POST /jobs -> {job_id, PENDING}, returns NOW
-...                            # a worker processes it off the request path
-api.get(rec.id).status         # GET /jobs/{id} -> PENDING | RUNNING | SUCCESS | FAILED
+rec = api.submit(video)  # POST /jobs -> {job_id, PENDING}, returns NOW
+...  # a worker processes it off the request path
+api.get(rec.id).status  # GET /jobs/{id} -> PENDING | RUNNING | SUCCESS | FAILED
 ```
 
 Here the work is an injected `handler` and the worker is an explicit

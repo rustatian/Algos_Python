@@ -39,9 +39,9 @@ def test_single_hit_in_window(counter_cls: type) -> None:
 @pytest.mark.parametrize("counter_cls", COUNTERS)
 def test_leetcode_362_example(counter_cls: type) -> None:
     """The canonical LeetCode #362 example:
-        hit(1); hit(2); hit(3); get_hits(4)  -> 3
-        hit(300); get_hits(300)              -> 4
-        get_hits(301)                        -> 3   (t=1 falls out)
+    hit(1); hit(2); hit(3); get_hits(4)  -> 3
+    hit(300); get_hits(300)              -> 4
+    get_hits(301)                        -> 3   (t=1 falls out)
     """
     c = counter_cls()
     c.hit(1)
@@ -110,11 +110,11 @@ def test_hits_spread_across_window_age_out_one_by_one(counter_cls: type) -> None
     c.hit(100)
     c.hit(200)
     c.hit(300)
-    assert c.get_hits(300) == 4   # window (0, 300]; all four in
-    assert c.get_hits(301) == 3   # window (1, 301]; t=1 out
-    assert c.get_hits(400) == 2   # window (100, 400]; t=1, t=100 out
-    assert c.get_hits(500) == 1   # window (200, 500]; only t=300 left
-    assert c.get_hits(600) == 0   # window (300, 600]; t=300 out too
+    assert c.get_hits(300) == 4  # window (0, 300]; all four in
+    assert c.get_hits(301) == 3  # window (1, 301]; t=1 out
+    assert c.get_hits(400) == 2  # window (100, 400]; t=1, t=100 out
+    assert c.get_hits(500) == 1  # window (200, 500]; only t=300 left
+    assert c.get_hits(600) == 0  # window (300, 600]; t=300 out too
 
 
 @pytest.mark.parametrize("counter_cls", COUNTERS)
@@ -154,7 +154,7 @@ def test_hit_at_last_slot_is_counted(counter_cls: type) -> None:
     c = counter_cls()
     c.hit(299)
     assert c.get_hits(299) == 1
-    c.hit(599)   # same slot (599 % 300 == 299) — collision overwrites
+    c.hit(599)  # same slot (599 % 300 == 299) — collision overwrites
     assert c.get_hits(599) == 1
 
 

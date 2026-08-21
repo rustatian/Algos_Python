@@ -39,9 +39,7 @@ def succeeding_fn():
 def test_closed_passes_successful_calls_through() -> None:
     """A fresh breaker is Closed; successful calls return their value."""
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=3, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=3, cooldown=10.0, clock=lambda: clock[0])
     assert b.call(succeeding_fn) == "ok"
     assert b.call(succeeding_fn) == "ok"
 
@@ -49,9 +47,7 @@ def test_closed_passes_successful_calls_through() -> None:
 def test_closed_propagates_exceptions() -> None:
     """A failing call in Closed state re-raises the underlying exception."""
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=3, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=3, cooldown=10.0, clock=lambda: clock[0])
     with pytest.raises(ValueError, match="boom"):
         b.call(failing_fn)
 
@@ -61,9 +57,7 @@ def test_closed_single_success_resets_failure_count() -> None:
     the count, so the breaker doesn't open prematurely.
     """
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=3, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=3, cooldown=10.0, clock=lambda: clock[0])
     # 2 failures, then a success, then 2 more failures = 2 consecutive, not 4.
     for _ in range(2):
         with pytest.raises(ValueError):
@@ -87,9 +81,7 @@ def test_threshold_failures_open_the_breaker() -> None:
     the very next call raises CircuitOpenError without invoking fn.
     """
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=3, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=3, cooldown=10.0, clock=lambda: clock[0])
     for _ in range(3):
         with pytest.raises(ValueError):
             b.call(failing_fn)
@@ -115,9 +107,7 @@ def test_open_fails_fast_during_cooldown() -> None:
     immediately — no probing, no fn invocation.
     """
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=1, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=1, cooldown=10.0, clock=lambda: clock[0])
     with pytest.raises(ValueError):
         b.call(failing_fn)
     # Open. Multiple calls inside the cooldown window all raise.
@@ -138,9 +128,7 @@ def test_half_open_probe_success_closes_the_breaker() -> None:
     failure count resets — subsequent failures restart the count.
     """
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=1, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=1, cooldown=10.0, clock=lambda: clock[0])
     with pytest.raises(ValueError):
         b.call(failing_fn)
     # Advance past cooldown.
@@ -161,9 +149,7 @@ def test_half_open_probe_failure_reopens_with_restarted_cooldown() -> None:
     Open AND restarts the cooldown timer from the probe's clock value.
     """
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=1, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=1, cooldown=10.0, clock=lambda: clock[0])
     with pytest.raises(ValueError):
         b.call(failing_fn)
     # Cooldown elapses; probe will run on the next call.
@@ -186,9 +172,7 @@ def test_cooldown_boundary_at_exactly_cooldown_seconds_allows_probe() -> None:
     t=0 should probe at exactly t=10.
     """
     clock = make_clock()
-    b = SimpleCircuitBreaker(
-        failure_threshold=1, cooldown=10.0, clock=lambda: clock[0]
-    )
+    b = SimpleCircuitBreaker(failure_threshold=1, cooldown=10.0, clock=lambda: clock[0])
     with pytest.raises(ValueError):
         b.call(failing_fn)
     # Exactly at the cooldown boundary — probe should fire.

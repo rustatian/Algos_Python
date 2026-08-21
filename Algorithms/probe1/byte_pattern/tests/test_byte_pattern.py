@@ -84,7 +84,9 @@ def test_stream_finds_boundary_spanning_match(chunk_size: int) -> None:
     """
     data = b"xxxxNEEDLExxxx"
     reader = io.BytesIO(data)
-    got = ChunkedRabinKarpSearch().search_stream(reader, b"NEEDLE", chunk_size=chunk_size)
+    got = ChunkedRabinKarpSearch().search_stream(
+        reader, b"NEEDLE", chunk_size=chunk_size
+    )
     assert got == [4]
 
 

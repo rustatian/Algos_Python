@@ -66,8 +66,8 @@ def test_try_acquire_consumes_tokens(bucket_cls: type) -> None:
     """
     b = bucket_cls(max_capacity=10, fill_rate=0)
     assert b.try_acquire(3) is True
-    assert b.try_acquire(7) is True       # exact remainder
-    assert b.try_acquire(1) is False      # nothing left
+    assert b.try_acquire(7) is True  # exact remainder
+    assert b.try_acquire(1) is False  # nothing left
 
 
 @pytest.mark.parametrize("bucket_cls", SYNC_BUCKETS)
@@ -76,8 +76,8 @@ def test_lazy_refill_after_elapsed_time(bucket_cls: type) -> None:
     lets try_acquire(n) succeed again.
     """
     b = bucket_cls(max_capacity=10, fill_rate=10)
-    assert b.try_acquire(10) is True        # drain
-    assert b.try_acquire(1) is False        # immediate retry: still empty
+    assert b.try_acquire(10) is True  # drain
+    assert b.try_acquire(1) is False  # immediate retry: still empty
     time.sleep(1.1)
     # 1.1 sec at fill_rate=10 → ~11 tokens earned, capped at 10.
     assert b.try_acquire(5) is True
@@ -89,10 +89,10 @@ def test_refill_caps_at_max_capacity(bucket_cls: type) -> None:
     bucket exceed its capacity.
     """
     b = bucket_cls(max_capacity=5, fill_rate=100)
-    assert b.try_acquire(5) is True         # drain
-    time.sleep(1.1)                          # would earn 110 tokens
-    assert b.try_acquire(5) is True         # cap = 5
-    assert b.try_acquire(1) is False        # confirms cap
+    assert b.try_acquire(5) is True  # drain
+    time.sleep(1.1)  # would earn 110 tokens
+    assert b.try_acquire(5) is True  # cap = 5
+    assert b.try_acquire(1) is False  # confirms cap
 
 
 # ===========================================================================
@@ -167,7 +167,7 @@ def test_multiple_waiters_each_get_their_tokens() -> None:
     the slowest waiter's shortfall / fill_rate.
     """
     b = ConcurrentTokenBucket(max_capacity=10, fill_rate=10)
-    assert b.try_acquire(10) is True        # drain
+    assert b.try_acquire(10) is True  # drain
 
     done = [threading.Event() for _ in range(3)]
 

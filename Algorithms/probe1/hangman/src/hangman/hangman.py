@@ -68,7 +68,9 @@ def _signature(word: str, letter: str) -> tuple[int, ...]:
     return tuple(i for i, ch in enumerate(word) if ch == letter)
 
 
-def _partition(words: frozenset[str], letter: str) -> dict[tuple[int, ...], frozenset[str]]:
+def _partition(
+    words: frozenset[str], letter: str
+) -> dict[tuple[int, ...], frozenset[str]]:
     """Group ``words`` by their signature under ``letter``.
 
     Each distinct signature is one outcome the chooser could announce; the
@@ -155,7 +157,9 @@ class BruteForceHangman:
         revealed = "_" * len(next(iter(ws)))
         return self._solve(ws, revealed)
 
-    def best_guess(self, words: Iterable[str], revealed: str | None = None) -> str | None:
+    def best_guess(
+        self, words: Iterable[str], revealed: str | None = None
+    ) -> str | None:
         ws = frozenset(words)
         if len(ws) <= 1:
             return None
@@ -271,7 +275,9 @@ class GreedyHangman:
         recursion, so it scales to dictionaries Tier 2 cannot.
     """
 
-    def best_guess(self, words: Iterable[str], revealed: str | None = None) -> str | None:
+    def best_guess(
+        self, words: Iterable[str], revealed: str | None = None
+    ) -> str | None:
         ws = frozenset(words)
         if len(ws) <= 1:
             return None
@@ -315,6 +321,8 @@ def play_game(strategy: object, words: Iterable[str], secret: str) -> int:
             candidates = frozenset(w for w in candidates if letter not in w)
         else:
             revealed = _reveal(revealed, letter, sig)
-            candidates = frozenset(w for w in candidates if _signature(w, letter) == sig)
+            candidates = frozenset(
+                w for w in candidates if _signature(w, letter) == sig
+            )
 
     return wrong

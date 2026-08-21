@@ -24,8 +24,8 @@ Four operations over absolute paths:
 fs = SimpleFileSystem()
 fs.mkdir("/a/b/c")
 fs.add_content_to_file("/a/b/c/d", "hello")
-fs.ls("/")                            # -> ["a"]
-fs.read_content_from_file("/a/b/c/d") # -> "hello"
+fs.ls("/")  # -> ["a"]
+fs.read_content_from_file("/a/b/c/d")  # -> "hello"
 ```
 
 The data structure is the insight: a tree where every directory holds a

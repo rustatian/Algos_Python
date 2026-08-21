@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/zigzag-conversion
 
+
 class Solution:
     # noinspection PyMethodMayBeStatic
     def convert(self, st: str, num_rows: int) -> str:

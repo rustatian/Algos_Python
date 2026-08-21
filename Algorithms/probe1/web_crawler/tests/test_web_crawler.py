@@ -591,8 +591,7 @@ def test_queue_crawler_runs_fetches_concurrently() -> None:
     QueueCrawler(max_workers=8).crawl("http://a.com/root", parser)
 
     assert parser.max_in_flight >= 2, (
-        "fetches never overlapped — the workers are not draining the queue "
-        "in parallel"
+        "fetches never overlapped — the workers are not draining the queue in parallel"
     )
 
 
@@ -615,4 +614,3 @@ def test_queue_crawler_crawls_a_large_cross_linked_graph() -> None:
     assert sorted(got) == sorted(f"http://a.com/{i}" for i in range(n))
     for i in range(n):
         assert parser.call_count[f"http://a.com/{i}"] == 1
-

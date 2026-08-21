@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/number-of-islands/
 
+
 class UnionFind:
     def __init__(self, grid: list[list[str]]) -> None:
         self.root = []
@@ -61,9 +62,14 @@ class Solution:
 # ]
 
 s = Solution()
-assert s.num_islands([
-    ["1", "1", "1", "1", "0"],
-    ["1", "1", "0", "1", "0"],
-    ["1", "1", "0", "0", "0"],
-    ["0", "0", "0", "0", "0"],
-]) == 1
+assert (
+    s.num_islands(
+        [
+            ["1", "1", "1", "1", "0"],
+            ["1", "1", "0", "1", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "0", "0", "0"],
+        ]
+    )
+    == 1
+)

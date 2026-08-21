@@ -281,8 +281,6 @@ def test_distributed_concurrent_writes_to_db_are_atomic(tmp_path: Path) -> None:
     got = DistributedFinder(max_workers=16).find(str(tmp_path))
     assert len(got) == 1
     expected = {
-        str(tmp_path / f"d{i}" / f"f{j}.txt")
-        for i in range(20)
-        for j in range(5)
+        str(tmp_path / f"d{i}" / f"f{j}.txt") for i in range(20) for j in range(5)
     }
     assert set(got[0]) == expected

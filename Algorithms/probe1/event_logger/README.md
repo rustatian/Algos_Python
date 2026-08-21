@@ -27,8 +27,10 @@ crash.
 ```python
 sink = InMemorySink()
 log = BatchedLogger(sink, batch_size=3)
-log.append("a"); log.append("b"); log.append("c")  # batch full -> flush
-sink.fsync_count        # -> 1   (three events, one fsync)
+log.append("a")
+log.append("b")
+log.append("c")  # batch full -> flush
+sink.fsync_count  # -> 1   (three events, one fsync)
 ```
 
 ## Tiers

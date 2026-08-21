@@ -59,8 +59,7 @@ def evil_hangman_reveal(
     candidates: set[str],
     guess: str,
     revealed: str,
-) -> tuple[set[str], str]:
-    ...
+) -> tuple[set[str], str]: ...
 ```
 
 One call = one adversary decision. The full game (Tier 2) calls this

@@ -126,8 +126,7 @@ def test_returned_group_is_consistent_with_returned_pattern() -> None:
     for word in new_cand:
         # Re-derive the pattern for this specific word; it must equal new_revealed.
         rebuilt = "".join(
-            revealed[i] if revealed[i] != "_"
-            else (guess if word[i] == guess else "_")
+            revealed[i] if revealed[i] != "_" else (guess if word[i] == guess else "_")
             for i in range(len(word))
         )
         assert rebuilt == new_revealed, (
@@ -135,7 +134,9 @@ def test_returned_group_is_consistent_with_returned_pattern() -> None:
         )
 
 
-def test_revealed_letter_in_pattern_stays_when_player_guesses_different_letter() -> None:
+def test_revealed_letter_in_pattern_stays_when_player_guesses_different_letter() -> (
+    None
+):
     """A previously-revealed 'a' must remain even when guessing 'e'."""
     candidates = {"made", "fade", "page"}
     new_cand, new_revealed = evil_hangman_reveal(candidates, "e", "_a__")

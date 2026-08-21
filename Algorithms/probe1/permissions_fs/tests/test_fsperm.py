@@ -24,13 +24,13 @@ PERMS = [SimplePermissions, CachedPermissions]
 #         └── user
 #
 TINY_TREE = {
-    "/":              None,
-    "/usr":           "/",
-    "/usr/local":     "/usr",
+    "/": None,
+    "/usr": "/",
+    "/usr/local": "/usr",
     "/usr/local/bin": "/usr/local",
-    "/etc":           "/",
-    "/home":          "/",
-    "/home/user":     "/home",
+    "/etc": "/",
+    "/home": "/",
+    "/home/user": "/home",
 }
 
 
@@ -112,7 +112,7 @@ def test_remove_preserves_other_ancestors(perms_cls: type) -> None:
     p.remove_access("/usr")
     # / still grants → /usr/local still accessible.
     assert p.has_access("/usr/local") is True
-    assert p.has_access("/usr") is True   # via root
+    assert p.has_access("/usr") is True  # via root
 
 
 @pytest.mark.parametrize("perms_cls", PERMS)

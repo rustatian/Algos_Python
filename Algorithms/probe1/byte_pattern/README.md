@@ -19,7 +19,7 @@ haystack is a multi-gigabyte file you cannot hold in RAM, so the search
 must run over a **stream** in bounded memory.
 
 ```python
-RabinKarpSearch().search(b"aaaa", b"aa")          # -> [0, 1, 2]
+RabinKarpSearch().search(b"aaaa", b"aa")  # -> [0, 1, 2]
 
 reader = io.BytesIO(b"xxxxNEEDLExxxx")
 ChunkedRabinKarpSearch().search_stream(reader, b"NEEDLE", chunk_size=4)

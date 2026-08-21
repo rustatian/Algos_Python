@@ -258,9 +258,7 @@ class CandidateFilter:
         self._candidates: list[str] = list(words)
 
     def observe(self, guess: str, fb: list[Feedback]) -> None:
-        self._candidates = [
-            w for w in self._candidates if feedback(w, guess) == fb
-        ]
+        self._candidates = [w for w in self._candidates if feedback(w, guess) == fb]
 
     def candidates(self) -> list[str]:
         return list(self._candidates)

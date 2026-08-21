@@ -6,6 +6,8 @@ from turtle import pen
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread, Lock, Event
 from urllib.parse import urlparse
+
+
 class HtmlClient:
     def fetch(self, url: str) -> str:
         return "html"
@@ -13,6 +15,7 @@ class HtmlClient:
 
 def extract_urls(html: str, base_url: str) -> list[str]:
     return []
+
 
 def crawl(start_url: str, client: HtmlClient) -> set[str]:
     """Returns the set of URLs reachable from seed_url on the same domain."""

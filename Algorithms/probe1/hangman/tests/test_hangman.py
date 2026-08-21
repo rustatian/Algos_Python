@@ -72,9 +72,9 @@ def test_brute_force_and_memoized_agree() -> None:
         {"word", "ward", "wird", "werd"},
     ]
     for words in dictionaries:
-        assert BruteForceHangman().min_wrong_guesses(words) == MemoizedHangman().min_wrong_guesses(
+        assert BruteForceHangman().min_wrong_guesses(
             words
-        )
+        ) == MemoizedHangman().min_wrong_guesses(words)
 
 
 # ----------------------------------------------------------------------

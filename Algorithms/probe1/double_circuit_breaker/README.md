@@ -62,7 +62,7 @@ All tiers expose the same `call` surface:
 
 ```python
 b = SimpleCircuitBreaker(failure_threshold=3, cooldown=10.0)
-result = b.call(some_function)        # returns result, or raises
+result = b.call(some_function)  # returns result, or raises
 ```
 
 Each tier answers the previous one's weak spot. Tier 1's

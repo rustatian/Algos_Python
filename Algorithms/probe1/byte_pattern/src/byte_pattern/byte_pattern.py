@@ -95,7 +95,9 @@ class NaiveSearch:
         n, m = len(haystack), len(needle)
         if m == 0 or m > n:
             return []
-        return [start for start in range(n - m + 1) if haystack[start : start + m] == needle]
+        return [
+            start for start in range(n - m + 1) if haystack[start : start + m] == needle
+        ]
 
 
 class RabinKarpSearch:
@@ -168,8 +170,7 @@ class RabinKarpSearch:
             if start < n - m:
                 # Roll the window one byte to the right in O(1).
                 window_hash = (
-                    (window_hash - haystack[start] * high) * _BASE
-                    + haystack[start + m]
+                    (window_hash - haystack[start] * high) * _BASE + haystack[start + m]
                 ) % _MOD
         return result
 

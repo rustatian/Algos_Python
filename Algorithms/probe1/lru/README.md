@@ -35,10 +35,11 @@ boundary node.
 
 ```python
 c = SimpleLRU(capacity=2)
-c.put("a", 1); c.put("b", 2)
-c.get("a")        # -> 1   ("a" now MRU, "b" is LRU)
-c.put("c", 3)     #        over capacity -> evict "b"
-c.get("b")        # -> None
+c.put("a", 1)
+c.put("b", 2)
+c.get("a")  # -> 1   ("a" now MRU, "b" is LRU)
+c.put("c", 3)  #        over capacity -> evict "b"
+c.get("b")  # -> None
 ```
 
 ## Tiers
